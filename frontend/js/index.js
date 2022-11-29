@@ -11,7 +11,8 @@ function reqError(err) {
 $('#fetchAll').click(function () {
 	$('#fetchAll').attr('disabled', true);
 	$.ajax({
-		url: 'localhost:3000/api/jocs',
+		url: 'http://localhost:3000/api/jocs',
+		type: "GET",
 		dataType: 'json',
 		success: reqOk,
 		error: reqError

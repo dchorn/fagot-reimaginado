@@ -4,13 +4,17 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mysql = require('mysql');
-const app = express()
-
+const app = express();
+const path = require('path');
 
 //configuració del bodyParser perquè admeti entrades json i
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+
+app.get('/', (req, res) => {
+	res.sendFile(path.join(__dirname, '../frontend/index.html'));
+})
 //només fem la petició get
 app.get('/hola', (req, res) => {
     res.send({ message: 'Hola món' })
@@ -19,7 +23,6 @@ app.get('/hola', (req, res) => {
 app.get('/hola/:name', (req, res) => {
     res.send({ message: `Hola món ${req.params.name}!` })
 })
-
 
 //////AIXÒ ÉS NOU I SERIA PER TREBALLAR AMB MYSQL
 //COMPTE: hem d'instal·lar mysql per a Node Express amb npm i -S mysql
@@ -34,7 +37,7 @@ var connection = mysql.createConnection({
 });
 
 //fem servir la BBDD que tenim
-app.get('/api/login', function (req, res) {
+app.get('/api/jocs', function (req, res) {
     console.log("estem a login");
 
     //provem de connectar-nos i capturar possibles errors

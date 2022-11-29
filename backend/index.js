@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 // i amb permissos restringits
 var connection = mysql.createConnection({
     host: 'localhost',
-    database: 'test',
+    database: 'jocs',
     user: 'root',
     password: ''
 });
@@ -38,7 +38,7 @@ app.get('/api/jocs', function (req, res) {
         }
         console.log('Connected as id ' + connection.threadId);
     });
-    connection.query('SELECT * FROM user', function (error, results, field) {
+    connection.query('select * from jocs', function (error, results, field) {
         if (error) {
             res.status(400).send({ resultats: null })
         } else {

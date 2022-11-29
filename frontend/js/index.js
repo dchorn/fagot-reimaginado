@@ -1,6 +1,6 @@
 function reqOk(data) {
 	console.log('data:', data);
-	$('main').empty();
+	// $('main').empty();
 }
 
 function reqError(err) {
@@ -11,7 +11,7 @@ function reqError(err) {
 $('#fetchAll').click(function () {
 	$('#fetchAll').attr('disabled', true);
 	$.ajax({
-		url: 'localhost:3000',
+		url: 'localhost:3000/api/jocs',
 		dataType: 'json',
 		success: reqOk,
 		error: reqError

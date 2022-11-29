@@ -11,18 +11,7 @@ const path = require('path');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-
-app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, '../frontend/index.html'));
-})
-//només fem la petició get
-app.get('/hola', (req, res) => {
-    res.send({ message: 'Hola món' })
-})
-//fem la petició get i recollim un paràmetre
-app.get('/hola/:name', (req, res) => {
-    res.send({ message: `Hola món ${req.params.name}!` })
-})
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 //////AIXÒ ÉS NOU I SERIA PER TREBALLAR AMB MYSQL
 //COMPTE: hem d'instal·lar mysql per a Node Express amb npm i -S mysql

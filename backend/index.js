@@ -47,7 +47,7 @@ app.get('/api/jocs', function (req, res) {
             // results.forEach(result => {
             // console.log(result.user);
             // })
-            res.status(200).send({ resultats: results })
+            res.status(200).send({ results })
         }
     });
     connection.end();

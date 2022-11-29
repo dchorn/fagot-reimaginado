@@ -28,7 +28,7 @@ app.get('/hola/:name', (req, res) => {
 // i amb permissos restringits
 var connection = mysql.createConnection({
     host: 'localhost',
-    database: 'test',
+    database: 'jocs',
     user: 'root',
     password: ''
 });
@@ -46,7 +46,7 @@ app.get('/api/login', function (req, res) {
         }
         console.log('Connected as id ' + connection.threadId);
     });
-    connection.query('SELECT * FROM user', function (error, results, field) {
+    connection.query('select * from jocs', function (error, results, field) {
         if (error) {
             res.status(400).send({ resultats: null })
         } else {

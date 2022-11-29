@@ -31,7 +31,6 @@ app.get('/api/jocs', function (req, res) {
 
     //provem de connectar-nos i capturar possibles errors
     connection.connect(function (err) {
-        console.log(err);
         if (err) {
             console.error('Error connecting: ' + err.stack);
             return;
@@ -40,6 +39,7 @@ app.get('/api/jocs', function (req, res) {
     });
     connection.query('select * from jocs', function (error, results, field) {
         if (error) {
+			console.log(error);
             res.status(400).send({ resultats: null })
         } else {
             /*COMPROVACIÓ DE DADES PER CONSOLA DE NODE*/

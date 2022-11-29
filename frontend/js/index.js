@@ -12,7 +12,6 @@ $('#fetchAll').click(function () {
 	$('#fetchAll').attr('disabled', true);
 	$.ajax({
 		url: 'http://localhost:3000/api/jocs',
-		type: "GET",
 		dataType: 'json',
 		success: reqOk,
 		error: reqError

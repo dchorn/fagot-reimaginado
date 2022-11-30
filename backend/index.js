@@ -50,7 +50,12 @@ app.get('/api/jocs', function (req, res) {
             // results.forEach(result => {
             // console.log(result.user);
             // })
-            res.send(results)
+			// console.log('results:', results)
+			let parsedResults = [];
+			results.forEach(result => {
+				parsedResults.push(JSON.parse(JSON.stringify(result)));
+			});
+            res.send(parsedResults);
         }
     });
 	connection.end()

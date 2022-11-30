@@ -66,21 +66,15 @@ $('#fetchAll').click(function () {
 })
 
 
-obj = {
-	nom: "CSGO",
-	preu: "12",
-	data: "2012-04-23T18:25:43.511Z",
-	genere: "Shooter"
-}
-
-$("submitBtn").click(function () {
-        $.ajax({
-			url: location.href,
-            type: "POST",
-            data: obj,
-            success: function(data){
-                console.log(data);
-            }
-        });
-    });
+$.ajax({
+	type: 'POST',
+	url: 'http://localhost:3000/api/afegir',
+	contentType: 'application/json',
+	data: JSON.stringify({
+		nom: "CSGO",
+		preu: "12",
+		data: "2012-04-23T18:25:43.511Z",
+		genere: "Shooter"
+	})
+})
 

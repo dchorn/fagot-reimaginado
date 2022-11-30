@@ -1,6 +1,9 @@
 function reqOk(data) {
 	console.log('data:', data);
-	// $('main').empty();
+	$('#buttons').display('none');
+	let table = '<table><thead>';
+	
+	$('main').append('<table>')
 }
 
 function reqError(err) {

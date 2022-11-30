@@ -7,6 +7,9 @@ const mysql = require('mysql');
 const app = express();
 const path = require('path');
 
+// Port config
+const port = process.env.PORT || 3000
+
 //configuració del bodyParser perquè admeti entrades json i
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -18,42 +21,41 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 //importem mysql
 //declarem els paràmetres de connexió (millor si l’usuari de connexió no és root sinó un usuari específic per aquesta BBDD
 // i amb permissos restringits
-var connection = mysql.createConnection({
-    host: 'localhost',
-    database: 'jocs',
-    user: 'root',
-    password: ''
-});
-
 //fem servir la BBDD que tenim
 app.get('/api/jocs', function (req, res) {
+	let connection = mysql.createConnection({
+		host: 'localhost',
+		database: 'jocs',
+		user: 'root',
+		password: ''
+	});
+
+	//provem de connectar-nos i capturar possibles errors
+	connection.connect(function (err) {
+		if (err) {
+			console.error('Error connecting: ' + err.stack);
+		}
+		console.log('Connected as id ' + connection.threadId);
+	});
+
     console.log("estem a login");
 
-    //provem de connectar-nos i capturar possibles errors
-    connection.connect(function (err) {
+    connection.query('select * from jocs', function (err, results, field) {
         if (err) {
-            console.error('Error connecting: ' + err.stack);
-            return;
-        }
-        console.log('Connected as id ' + connection.threadId);
-    });
-    connection.query('select * from jocs', function (error, results, field) {
-        if (error) {
-			console.log(error);
-            res.status(400).send({ resultats: null })
+			// console.log(error);
+            res.status(500).send(err)
         } else {
             /*COMPROVACIÓ DE DADES PER CONSOLA DE NODE*/
             // console.log(results);
             // results.forEach(result => {
             // console.log(result.user);
             // })
-            res.status(200).send({ results })
+            res.send(results)
         }
     });
-    connection.end();
+	connection.end()
 })
 
-const port = process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`Aquesta és la nostra API-REST que corre en http://localhost:${port}`)
 })

@@ -17,3 +17,23 @@ $('#fetchAll').click(function () {
 		error: reqError
 	})
 })
+
+
+obj = {
+	nom: "CSGO",
+	preu: "12",
+	data: "2012-04-23T18:25:43.511Z",
+	genere: "Shooter"
+}
+
+$("submitBtn").click(function () {
+        $.ajax({
+			url: location.href,
+            type: "POST",
+            data: obj,
+            success: function(data){
+                console.log(data);
+            }
+        });
+    });
+

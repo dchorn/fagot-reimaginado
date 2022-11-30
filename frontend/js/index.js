@@ -29,7 +29,7 @@ obj = {
 
 $("submitBtn").click(function () {
         $.ajax({
-			url: 'http://localhost:3000/api/afegir',
+			url: location.href,
             type: "POST",
             data: obj,
             success: function(data){

@@ -71,8 +71,10 @@ $.ajax({
 	url: 'http://localhost:3000/api/afegir',
 	contentType: 'application/json',
 	data: JSON.stringify({
+		id: 12,
 		nom: "CSGO",
-		preu: "12",
+		preu: 12.0,
+		clase_preu: "gratis",
 		data: "2012-04-23T18:25:43.511Z",
 		genere: "Shooter"
 	})

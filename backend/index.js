@@ -46,7 +46,7 @@ app.post('/api/afegir', function (req, res) {
 
 	let data = req.body;
 
-	let sql = "INSERT IGNORE INTO jocs (nom, preu, data, genere) VALUES ('" + data.nom +"','" + data.preu +"','" + data.data +"','" + data.genere+"');"	
+	let sql = `INSERT IGNORE INTO jocs (id, nom, preu, clase_preu, genere, data_llançament) VALUES ("${data.id}", "${data.nom}", "${data.preu}", "${data.clase_preu}", "${data.genere}", "${data.data}");`
 
 
 	connection.query(sql, data, function (err, result) {

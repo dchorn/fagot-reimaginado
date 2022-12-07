@@ -18,6 +18,11 @@ app.use(bodyParser.json())
 // Use '../frontend' for the main folder
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+
+
+// Get Data from DataBase
+app.get('/api/jocs', function (req, res) {
+
 // Mysql Connection data
 const connection = mysql.createConnection({
 	host: 'localhost',
@@ -25,9 +30,6 @@ const connection = mysql.createConnection({
 	user: 'root',
 	password: ''
 });
-
-// Get Data from DataBase
-app.get('/api/jocs', function (req, res) {
 
 	//provem de connectar-nos i capturar possibles errors
 	connection.connect(function (err) {
@@ -58,6 +60,14 @@ app.get('/api/jocs', function (req, res) {
 app.post('/api/afegir', function (req, res) {
 	console.log("estem a login");
 
+
+// Mysql Connection data
+const connection = mysql.createConnection({
+	host: 'localhost',
+	database: 'jocs',
+	user: 'root',
+	password: ''
+});
 	connection.connect(function (err) {
 		if (err) {
 			console.error('Error connecting: ' + err.stack);

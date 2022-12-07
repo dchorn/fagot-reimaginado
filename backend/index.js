@@ -26,8 +26,8 @@ const connection = mysql.createConnection({
 });
 
 app.post('/api/afegir', function (req, res) {
-    console.log("estem a login");
-	
+	console.log("estem a login");
+
 	connection.connect(function (err) {
 		if (err) {
 			console.error('Error connecting: ' + err.stack);
@@ -60,23 +60,23 @@ app.get('/api/jocs', function (req, res) {
 		console.log('Connected as id ' + connection.threadId);
 	});
 
-    console.log("estem a login");
+	console.log("estem a login");
 
-    connection.query('select * from jocs', function (err, results, field) {
-        if (err) {
+	connection.query('select * from jocs', function (err, results, field) {
+		if (err) {
 			// console.log(error);
-            res.status(500).send(err)
-        } else {
+			res.status(500).send(err)
+		} else {
 			let parsedResults = [];
 			results.forEach(result => {
 				parsedResults.push(JSON.parse(JSON.stringify(result)));
 			});
-            res.send(parsedResults);
-        }
-    });
+			res.send(parsedResults);
+		}
+	});
 	connection.end()
 })
 
 app.listen(port, () => {
-    console.log(`Aquesta és la nostra API-REST que corre en http://localhost:${port}`)
+	console.log(`Aquesta és la nostra API-REST que corre en http://localhost:${port}`)
 })

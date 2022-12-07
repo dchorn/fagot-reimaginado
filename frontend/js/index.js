@@ -1,9 +1,9 @@
 function humanize(str) {
-  let i, frags = str.split('_');
-  for (i=0; i<frags.length; i++) {
-    frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
-  }
-  return frags.join(' ');
+	let i, frags = str.split('_');
+	for (i = 0; i < frags.length; i++) {
+		frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+	}
+	return frags.join(' ');
 }
 
 function reqOk(data) {
@@ -44,7 +44,7 @@ function reqOk(data) {
 			if (game.hasOwnProperty(game_key)) {
 				table += '<td>';
 				if (game[game_key] instanceof Date) {
-					table += `<input type="text" id="${game.nom}Date" name="date" value="${game[game_key].toISOString().slice(0,10)}">`;
+					table += `<input type="text" id="${game.nom}Date" name="date" value="${game[game_key].toISOString().slice(0, 10)}">`;
 				} else if (price_regex.test(game[game_key])) {
 					table += `<input type="number" name="${game.nom}Price" value="${game[game_key]}">`;
 				} else {
@@ -63,7 +63,7 @@ function reqOk(data) {
 	$.datepicker.setDefaults(
 		$.datepicker.regional['ca'],
 	)
-	
+
 	$('input[name=date]').each(function (_, elem) {
 		$(elem).datepicker(
 			{

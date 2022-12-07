@@ -4,13 +4,13 @@ class ClasePreu {
 	static barat = new ClasePreu(1, 'barat', 0.01, 7.99);
 	static mitja = new ClasePreu(2, 'mitjà', 8, 24.99);
 	static car = new ClasePreu(3, 'car', 25, 1000);
-	
+
 	constructor(id, type, from, to) {
 		this.id = id;
 		this.type = type;
-		this.range = {'from': from, 'to': to};
+		this.range = { 'from': from, 'to': to };
 	}
-	
+
 	toString() {
 		return `${this.type}`;
 	}
@@ -35,7 +35,7 @@ class ClasePreu {
 		return this._range;
 	}
 
-	set range({from, to}) {
+	set range({ from, to }) {
 		this._range = { "from": from, "to": to };
 	}
 }
@@ -118,7 +118,7 @@ class Game {
 	}
 
 	get dataLlan() {
-		return this._dataLlan.toISOString().slice(0,10);
+		return this._dataLlan.toISOString().slice(0, 10);
 	}
 
 	toString() {

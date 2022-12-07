@@ -104,6 +104,17 @@ $('#fetchAll').click(function () {
 })
 
 
+$('#update').click(function () {
+	$('#update').attr('disabled', true);
+	$.ajax({
+		type: 'POST',
+		url: 'http://localhost:3000/api/update',
+		dataType: 'json',
+		data: JSON.stringify(game),
+		success: reqOk,
+		error: reqError
+	})
+})
 // $.ajax({
 	// type: 'POST',
 	// url: 'http://localhost:3000/api/afegir',

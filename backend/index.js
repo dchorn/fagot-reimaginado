@@ -89,6 +89,38 @@ const connection = mysql.createConnection({
 })
 
 
+// Insert Data to Data Base
+app.post('/api/update', function (req, res) {
+	console.log("estem a update");
+
+// Mysql Connection data
+const connection = mysql.createConnection({
+	host: 'localhost',
+	database: 'jocs',
+	user: 'root',
+	password: ''
+});
+	connection.connect(function (err) {
+		if (err) {
+			console.error('Error connecting: ' + err.stack);
+		}
+		console.log('Connected as id ' + connection.threadId);
+	});
+
+	let data = req.body;
+
+	let sql = `update jocs set (id, nom, preu, clase_preu, genere, data_llançament) VALUES ("${data.id}", "${data.nom}", "${data.preu}", "${data.clase_preu}", "${data.genere}", "${data.data}") where id="${data.id}";`
+
+	connection.query(sql, data, function (err, result) {
+		if (err) throw err;
+		console.log("Number of records inserted: " + result.affectedRows);
+	})
+
+	console.log(data)
+	res.status(200).send(data)
+})
+
+
 app.listen(port, () => {
 	console.log(`Aquesta és la nostra API-REST que corre en http://localhost:${port}`)
 })

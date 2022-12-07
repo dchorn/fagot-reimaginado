@@ -95,7 +95,7 @@ class Game {
 	set clase_preu(preu) {
 		const objk = Object.keys(ClasePreu);
 		for (const gt in objk) {
-			if (ClasePreu[objk[gt]].range.to > preu && ClasePreu[objk[gt]].range.from < preu) {
+			if (ClasePreu[objk[gt]].range.to >= preu && ClasePreu[objk[gt]].range.from <= preu) {
 				this._clase_preu = ClasePreu[objk[gt]];
 			}
 		}

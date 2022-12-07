@@ -110,7 +110,7 @@ $('#update').click(function () {
 		type: 'POST',
 		url: 'http://localhost:3000/api/update',
 		dataType: 'json',
-		data: JSON.stringify(game),
+		data: JSON.stringify(gameData),
 		success: reqOk,
 		error: reqError
 	})

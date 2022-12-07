@@ -107,14 +107,18 @@ const connection = mysql.createConnection({
 		console.log('Connected as id ' + connection.threadId);
 	});
 
-	let data = req.body;
+	let data_obj = req.body;
 
-	let sql = `update jocs set (id, nom, preu, clase_preu, genere, data_llançament) VALUES ("${data.id}", "${data.nom}", "${data.preu}", "${data.clase_preu}", "${data.genere}", "${data.data}") where id="${data.id}";`
 
-	connection.query(sql, data, function (err, result) {
+	data_obj.forEach(data => {
+		let sql = `update jocs set (nom, preu, clase_preu, genere, data_llançament) VALUES ("${data.nom}", "${data.preu}", "${data.clase_preu}", "${data.genere}", "${data.data}") where id="${data.id}";`
+	
+		connection.query(sql, data, function (err, result) {
 		if (err) throw err;
 		console.log("Number of records inserted: " + result.affectedRows);
 	})
+	})
+
 
 	console.log(data)
 	res.status(200).send(data)

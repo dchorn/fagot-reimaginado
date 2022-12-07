@@ -76,6 +76,8 @@ const connection = mysql.createConnection({
 	});
 
 	let data = req.body;
+	console.log('req:', req.body)
+	console.log('data:', data)
 
 	let sql = `INSERT IGNORE INTO jocs (id, nom, preu, clase_preu, genere, data_llançament) VALUES ("${data.id}", "${data.nom}", "${data.preu}", "${data.clase_preu}", "${data.genere}", "${data.data}");`
 

@@ -44,7 +44,7 @@ function reqOk(data) {
 			if (game.hasOwnProperty(game_key)) {
 				table += '<td>';
 				if (game[game_key] instanceof Date) {
-					table += `<input type="text" id="${game.nom}Date" name="date" value="${game[game_key].toISOString().slice(0, 10)}">`;
+					table += `<input type="text" id="${game.nom}Date" name="date" value="${game[game_key].getDate()}-${game[game_key].getMonth() + 1}-${game[game_key].getFullYear()}">`;
 				} else if (price_regex.test(game[game_key])) {
 					table += `<input type="number" name="${game.nom}Price" value="${game[game_key]}">`;
 				} else {
@@ -73,7 +73,8 @@ function reqOk(data) {
 				dayNames: ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte']
 			}
 		)
-		//$(elem).datepicker('setDate', $(elem).value)
+		// console.log('$(elem):', $(elem).val())
+		$(elem).datepicker('setDate', $(elem).val())
 	})
 
 	$('input').on('change', function () {

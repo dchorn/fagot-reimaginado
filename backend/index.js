@@ -17,25 +17,17 @@ app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-//////AIXÒ ÉS NOU I SERIA PER TREBALLAR AMB MYSQL
-//COMPTE: hem d'instal·lar mysql per a Node Express amb npm i -S mysql
-//importem mysql
-//declarem els paràmetres de connexió (millor si l’usuari de connexió no és root sinó un usuari específic per aquesta BBDD
-// i amb permissos restringits
-//fem servir la BBDD que tenim
-//
-
+// Mysql Connection data
+const connection = mysql.createConnection({
+	host: 'localhost',
+	database: 'jocs',
+	user: 'root',
+	password: ''
+});
 
 app.post('/api/afegir', function (req, res) {
     console.log("estem a login");
 	
-	let connection = mysql.createConnection({
-		host: 'localhost',
-		database: 'jocs',
-		user: 'root',
-		password: ''
-	});
-
 	connection.connect(function (err) {
 		if (err) {
 			console.error('Error connecting: ' + err.stack);
@@ -43,11 +35,10 @@ app.post('/api/afegir', function (req, res) {
 		console.log('Connected as id ' + connection.threadId);
 	});
 
-
 	let data = req.body;
 
+	// Insert Data to Data Base
 	let sql = `INSERT IGNORE INTO jocs (id, nom, preu, clase_preu, genere, data_llançament) VALUES ("${data.id}", "${data.nom}", "${data.preu}", "${data.clase_preu}", "${data.genere}", "${data.data}");`
-
 
 	connection.query(sql, data, function (err, result) {
 		if (err) throw err;
@@ -58,14 +49,8 @@ app.post('/api/afegir', function (req, res) {
 	res.status(200).send(data)
 })
 
-
+// Get Data from DataBase
 app.get('/api/jocs', function (req, res) {
-	let connection = mysql.createConnection({
-		host: 'localhost',
-		database: 'jocs',
-		user: 'root',
-		password: ''
-	});
 
 	//provem de connectar-nos i capturar possibles errors
 	connection.connect(function (err) {
@@ -82,12 +67,6 @@ app.get('/api/jocs', function (req, res) {
 			// console.log(error);
             res.status(500).send(err)
         } else {
-            /*COMPROVACIÓ DE DADES PER CONSOLA DE NODE*/
-            // console.log(results);
-            // results.forEach(result => {
-            // console.log(result.user);
-            // })
-			// console.log('results:', results)
 			let parsedResults = [];
 			results.forEach(result => {
 				parsedResults.push(JSON.parse(JSON.stringify(result)));

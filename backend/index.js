@@ -11,10 +11,11 @@ const { connect } = require('http2');
 // Port config
 const port = process.env.PORT || 3000
 
-//configuració del bodyParser perquè admeti entrades json i
+// configuració del bodyParser perquè admeti entrades json
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+// Use '../frontend' for the main folder
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Mysql Connection data
@@ -24,30 +25,6 @@ const connection = mysql.createConnection({
 	user: 'root',
 	password: ''
 });
-
-app.post('/api/afegir', function (req, res) {
-	console.log("estem a login");
-
-	connection.connect(function (err) {
-		if (err) {
-			console.error('Error connecting: ' + err.stack);
-		}
-		console.log('Connected as id ' + connection.threadId);
-	});
-
-	let data = req.body;
-
-	// Insert Data to Data Base
-	let sql = `INSERT IGNORE INTO jocs (id, nom, preu, clase_preu, genere, data_llançament) VALUES ("${data.id}", "${data.nom}", "${data.preu}", "${data.clase_preu}", "${data.genere}", "${data.data}");`
-
-	connection.query(sql, data, function (err, result) {
-		if (err) throw err;
-		console.log("Number of records inserted: " + result.affectedRows);
-	})
-
-	console.log(data)
-	res.status(200).send(data)
-})
 
 // Get Data from DataBase
 app.get('/api/jocs', function (req, res) {
@@ -76,6 +53,31 @@ app.get('/api/jocs', function (req, res) {
 	});
 	connection.end()
 })
+
+// Insert Data to Data Base
+app.post('/api/afegir', function (req, res) {
+	console.log("estem a login");
+
+	connection.connect(function (err) {
+		if (err) {
+			console.error('Error connecting: ' + err.stack);
+		}
+		console.log('Connected as id ' + connection.threadId);
+	});
+
+	let data = req.body;
+
+	let sql = `INSERT IGNORE INTO jocs (id, nom, preu, clase_preu, genere, data_llançament) VALUES ("${data.id}", "${data.nom}", "${data.preu}", "${data.clase_preu}", "${data.genere}", "${data.data}");`
+
+	connection.query(sql, data, function (err, result) {
+		if (err) throw err;
+		console.log("Number of records inserted: " + result.affectedRows);
+	})
+
+	console.log(data)
+	res.status(200).send(data)
+})
+
 
 app.listen(port, () => {
 	console.log(`Aquesta és la nostra API-REST que corre en http://localhost:${port}`)

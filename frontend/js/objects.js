@@ -59,7 +59,7 @@ class Genere {
 }
 
 class Game {
-	constructor(id, nom, preu, clase_preu, genere, dataLlan) {
+	constructor(id, nom, preu, genere, dataLlan) {
 		this.id = id;
 		this.nom = nom;
 		this.preu = preu;
